@@ -1,0 +1,55 @@
+from math import ceil
+
+def complete(sg,new_gen,g):
+  ### Input: sg is a sorted list; new_gen and g  are a positive integer
+  ### This method inputs a semi group truncated up to 2g and a new generator to update the semi group.
+  ### Output: new_sg is a sorted list with a the new semi group adjunted the new generator
+  if new_gen in sg:
+    return sg
+  n=new_gen
+  new_sg=set(sg)
+  while n<=2*g:
+    new_sg.add(n)
+    for elem in sg:
+      if elem+n<=2*g:
+        new_sg.add(elem+n)
+      else:
+        break
+    n+=new_gen
+  new_sg=list(new_sg)
+  new_sg.sort()
+  return new_sg
+
+def Weight(L):
+  ### Input: a list L of gaps of a point
+  ### Output: the  weight of the point with the gap-sequence L
+  cont=0
+  g=int(len(L)/2)
+  for i in range(len(L)):
+    # print(L[i])
+    cont+=L[i]-i-1
+  return cont
+
+def find_max_weight(g,sg=[],n=3):
+  ### Input: an integer g the genus of the curve; a list sg the current non-gaps sequence; an integer n the new generator for the semigroup.
+  ### Output: the maximum weight of a hypothetical point in genus g and the complement of its gap-sequence
+  if len(sg)==g:
+    gaps=list(range(1,2*g+1))
+    for i in sg:
+      gaps.remove(i)
+    w=Weight(gaps)
+    return w,sg,n
+  if len(sg)>g:
+    return -1,sg,n
+  w_max=0
+  sg_max=[]
+  for i in range(n,2*g+1):
+    if i in sg:
+      pass
+    else:
+      new_sg=complete(sg,i,g)
+      w2,sg2=find_max_weight(g,new_sg,i)[:2]
+      if w_max<w2:
+        w_max=w2
+        sg_max=sg2
+  return w_max,sg_max,n
