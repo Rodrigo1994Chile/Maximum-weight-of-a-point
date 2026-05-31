@@ -49,6 +49,6 @@ Farkas V., Kra I. Riemann surfaces, Graduate Texts in Mathematics 71, Springer-V
 Miranda, R. Algebraic curves and Riemann surfaces (Graduate Studies in Mathematics, Vol 5). American Mathematical Society. (1995)
 
 
-### Example
+## Example
 
 print(find_max_weight(5))
