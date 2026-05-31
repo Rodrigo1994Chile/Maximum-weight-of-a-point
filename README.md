@@ -1,6 +1,6 @@
 # Python routine for computing theoretical weights on points of algebraic curves
 
-This repository contains a SageMath routine related to the study of Weierstrass points on algebraic curves.
+This repository contains a Python routine related to the study of Weierstrass points on algebraic curves.
 
 Current functionality includes:
 
